@@ -1,0 +1,28 @@
+## this is code snippets
+
+```py
+def foo(request):
+   if request.method == 'POST':
+      print('hello world~')
+
+while(true):
+    print('piro jjang')
+```
+
+```html
+<script>
+alert('XSS')
+</script>
+```
+
+<script>
+alert('XSS')
+</script>
+
+*LOOK AT ME*
+
+<U>no</U>
+
+**GOOD**
+
+> javascript is...

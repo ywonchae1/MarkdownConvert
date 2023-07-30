@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <label for="">Input here:</label>
+    <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+    <button onclick="onClickMD('textarea')">submit</button>
+    
+    <div class="result">
+        result is...
+    </div>
+    
+    <script>
+        const reqText = new XMLHttpRequest();
+        const onClickMD = (id) => {
+            const url = '/submit/';
+            reqText.open('POST', url, true);
+    
+            reqText.setRequestHeader(
+                'Content-Type',
+                'application/x-www-form-urlencoded'
+            );
+            let textarea = document.getElementById(id);
+            let textMD = textarea.value;
+            reqText.send(JSON.stringify({id: id, textMD: textMD}));
+        }
+    
+        reqText.onreadystatechange = () => {
+            if(reqText.readyState === XMLHttpRequest.DONE) {
+                if(reqText.status < 400) {
+                    const {id, content} = JSON.parse(reqText.response);
+    
+                    let result = document.querySelector('.result');
+                    console.log(content);
+                    result.innerHTML = content;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
